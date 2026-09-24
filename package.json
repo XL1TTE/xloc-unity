@@ -1,0 +1,21 @@
+{
+  "name": "com.xl1tte.localization",
+  "version": "1.0.0",
+  "displayName": "xLoc - Lightweight YAML Localization",
+  "description": "Zero-dependency hierarchical YAML localization package for Unity with TextMeshPro auto-binding and smart editor workflows.",
+  "unity": "2022.3",
+  "author": {
+    "name": "XL1TTE"
+  },
+  "dependencies": {
+    "com.unity.ugui": "2.0.0"
+  },
+  "keywords": [
+    "localization",
+    "yaml",
+    "textmeshpro",
+    "i18n",
+    "l10n"
+  ],
+  "license": "MIT"
+}

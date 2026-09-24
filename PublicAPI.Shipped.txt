@@ -1,0 +1,40 @@
+static class xLoc.UI.LocUIExtensions
+static xLoc.UI.LocUIExtensions.BindLoc(this TMPro.TMP_Text text, in xLoc.LocalizedString loc) -> void
+static xLoc.UI.LocUIExtensions.BindLoc(this TMPro.TMP_Text text, string key, string fallback = null) -> void
+static class xLoc.xLoc
+static xLoc.xLoc.CurrentLocale.get -> xLoc.LocaleKey
+static xLoc.xLoc.Get(in xLoc.LocalizedString loc) -> string
+static xLoc.xLoc.Get(string key, string fallback = null) -> string
+static xLoc.xLoc.Initialize(string path = "Localization") -> void
+static xLoc.xLoc.IsInitialized.get -> bool
+static xLoc.xLoc.Locales.get -> System.Collections.Generic.IReadOnlyList<xLoc.LocaleKey>
+static xLoc.xLoc.SetLocale(xLoc.LocaleKey locale) -> void
+static xLoc.xLoc.TryGet(string key, out string value) -> bool
+xLoc.LocaleKey
+xLoc.LocaleKey.CompareTo(xLoc.LocaleKey other) -> int
+xLoc.LocaleKey.Equals(object obj) -> bool
+xLoc.LocaleKey.Equals(xLoc.LocaleKey other) -> bool
+xLoc.LocaleKey.GetHashCode() -> int
+xLoc.LocaleKey.IsEmpty.get -> bool
+xLoc.LocaleKey.LocaleKey(string value) -> void
+xLoc.LocaleKey.ToString() -> string
+xLoc.LocaleKey.Value.get -> string
+static xLoc.LocaleKey.explicit operator xLoc.LocaleKey(string value) -> xLoc.LocaleKey
+static xLoc.LocaleKey.implicit operator string(xLoc.LocaleKey key) -> string
+static xLoc.LocaleKey.operator !=(xLoc.LocaleKey left, xLoc.LocaleKey right) -> bool
+static xLoc.LocaleKey.operator ==(xLoc.LocaleKey left, xLoc.LocaleKey right) -> bool
+xLoc.LocalizationNotFoundException
+xLoc.LocalizationNotFoundException.LocalizationNotFoundException(string path) -> void
+xLoc.LocalizedString
+xLoc.LocalizedString.Equals(object obj) -> bool
+xLoc.LocalizedString.Equals(xLoc.LocalizedString other) -> bool
+xLoc.LocalizedString.Fallback -> string
+xLoc.LocalizedString.GetHashCode() -> int
+xLoc.LocalizedString.IsEmpty.get -> bool
+xLoc.LocalizedString.Key -> string
+xLoc.LocalizedString.LocalizedString(string key, string fallback = null) -> void
+xLoc.LocalizedString.ToString() -> string
+xLoc.LocalizedString.Value.get -> string
+static xLoc.LocalizedString.implicit operator string(xLoc.LocalizedString loc) -> string
+static xLoc.LocalizedString.operator !=(xLoc.LocalizedString left, xLoc.LocalizedString right) -> bool
+static xLoc.LocalizedString.operator ==(xLoc.LocalizedString left, xLoc.LocalizedString right) -> bool
