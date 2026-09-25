@@ -30,6 +30,7 @@ namespace xLoc.UI
             InitBaseFont();
             _key = key;
             _fallback = fallback;
+            Subscribe();
             UpdateVisuals();
         }
 
@@ -56,6 +57,11 @@ namespace xLoc.UI
         }
 
         private void OnDisable()
+        {
+            Unsubscribe();
+        }
+
+        private void OnDestroy()
         {
             Unsubscribe();
         }
