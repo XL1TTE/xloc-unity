@@ -52,6 +52,27 @@ namespace xLoc
         }
 
         /// <summary>
+        /// Retrieves an ordered list of translated strings stored under an indexed sequence key (e.g. "prefix.0", "prefix.1").
+        /// </summary>
+        /// <param name="key">Dot-separated base sequence key.</param>
+        /// <returns>Read-only list of translated strings.</returns>
+        public IReadOnlyList<string> GetList(string key)
+        {
+            if (string.IsNullOrEmpty(key))
+                return Array.Empty<string>();
+
+            var list = new List<string>();
+            int index = 0;
+            while (_entries.TryGetValue($"{key}.{index}", out var val))
+            {
+                list.Add(val);
+                index++;
+            }
+
+            return list;
+        }
+
+        /// <summary>
         /// Adds or overwrites a translation key-value entry.
         /// </summary>
         /// <param name="key">Dot-separated translation key.</param>

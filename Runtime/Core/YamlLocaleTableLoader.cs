@@ -39,6 +39,14 @@ namespace xLoc
                     Flatten(entry.Value, nextPrefix, ref table);
                 }
             }
+            else if (node is IList list)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    string nextPrefix = string.IsNullOrEmpty(prefix) ? i.ToString() : $"{prefix}.{i}";
+                    Flatten(list[i], nextPrefix, ref table);
+                }
+            }
             else if (node != null && !string.IsNullOrEmpty(prefix))
             {
                 table.Set(prefix, node.ToString());

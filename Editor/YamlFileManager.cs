@@ -47,10 +47,11 @@ namespace xLoc.Editor
             return list;
         }
 
-        internal static string GetFilePathForLocale(LocaleKey locale)
+        internal static List<string> GetFilesForLocale(LocaleKey locale)
         {
+            var result = new List<string>();
             if (!Directory.Exists(LocalizationFolderPath))
-                Directory.CreateDirectory(LocalizationFolderPath);
+                return result;
 
             var files = new List<string>();
             files.AddRange(Directory.GetFiles(LocalizationFolderPath, "*.yaml", SearchOption.AllDirectories));
@@ -61,8 +62,21 @@ namespace xLoc.Editor
                 string fileName = Path.GetFileNameWithoutExtension(files[i]);
                 string suffix = fileName.ExtractLocaleSuffix();
                 if (string.Equals(suffix, locale.Value, StringComparison.OrdinalIgnoreCase))
-                    return files[i];
+                    result.Add(files[i]);
             }
+
+            return result;
+        }
+
+        internal static string GetFilePathForLocale(LocaleKey locale)
+        {
+            var files = GetFilesForLocale(locale);
+            if (files.Count > 0)
+                return files[0];
+
+            string localeDir = Path.Combine(LocalizationFolderPath, locale.Value);
+            if (Directory.Exists(localeDir))
+                return Path.Combine(localeDir, $"{locale.Value}.yaml");
 
             return Path.Combine(LocalizationFolderPath, $"{locale.Value}.yaml");
         }
@@ -73,12 +87,16 @@ namespace xLoc.Editor
             if (string.IsNullOrEmpty(dotKey))
                 return false;
 
-            string filePath = GetFilePathForLocale(locale);
-            if (!File.Exists(filePath))
-                return false;
+            var files = GetFilesForLocale(locale);
+            for (int i = 0; i < files.Count; i++)
+            {
+                if (!File.Exists(files[i])) continue;
+                var root = ReadYaml(files[i]);
+                if (TryGetPath(root, dotKey, out value))
+                    return true;
+            }
 
-            var root = ReadYaml(filePath);
-            return TryGetPath(root, dotKey, out value);
+            return false;
         }
 
         internal static void SetTranslation(LocaleKey locale, string dotKey, string value)
@@ -86,11 +104,23 @@ namespace xLoc.Editor
             if (string.IsNullOrEmpty(dotKey))
                 return;
 
-            string filePath = GetFilePathForLocale(locale);
-            var root = File.Exists(filePath) ? ReadYaml(filePath) : new Dictionary<object, object>();
+            var files = GetFilesForLocale(locale);
+            string targetFile = files.Count > 0 ? files[0] : GetFilePathForLocale(locale);
 
+            for (int i = 0; i < files.Count; i++)
+            {
+                if (!File.Exists(files[i])) continue;
+                var testRoot = ReadYaml(files[i]);
+                if (TryGetPath(testRoot, dotKey, out _))
+                {
+                    targetFile = files[i];
+                    break;
+                }
+            }
+
+            var root = File.Exists(targetFile) ? ReadYaml(targetFile) : new Dictionary<object, object>();
             SetPath(root, dotKey, value);
-            WriteYaml(filePath, root);
+            WriteYaml(targetFile, root);
         }
 
         internal static void RenameKeyAcrossAllLocales(string oldKey, string newKey)

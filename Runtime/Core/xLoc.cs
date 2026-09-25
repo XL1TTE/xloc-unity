@@ -81,6 +81,13 @@ namespace xLoc
         public static string Get(string key, string fallback = null) => Registry.ActiveTable.Get(key, fallback);
 
         /// <summary>
+        /// Resolves an ordered list of translated strings for an indexed sequence key in the active locale.
+        /// </summary>
+        /// <param name="key">Dot-notation base key of the sequence.</param>
+        /// <returns>Read-only list of translated strings.</returns>
+        public static IReadOnlyList<string> GetList(string key) => Registry.ActiveTable.GetList(key);
+
+        /// <summary>
         /// Resolves the translation for the given <see cref="LocalizedString"/> in the active locale.
         /// </summary>
         /// <param name="loc">Localized string reference.</param>
