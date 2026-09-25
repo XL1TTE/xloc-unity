@@ -1,6 +1,6 @@
 # 🌐 xLoc
 
-**xLoc** is a lightweight YAML localization framework for **Unity** with zero-boilerplate **TextMeshPro** binding and in-inspector translation editing.
+**xLoc** is a lightweight YAML localization framework for **Unity** with zero-boilerplate **TextMeshPro** binding, per-language font mapping, and in-inspector translation editing.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
 [![Unity](https://img.shields.io/badge/Unity-2022.3%2B-blue.svg)]()
@@ -11,9 +11,11 @@
 ## Features
 
 * **Hierarchical YAML**: Clean nested YAML syntax (`items: sword: name: "Iron Sword"` -> `items.sword.name`).
-* **Auto-Discovery**: Place `*_en.yml`, `*_es.yml`, etc. anywhere in `Resources/Localization/`. Available languages are detected automatically.
-* **Auto-Updating UI**: Bind `TMP_Text` in one line (`text.BindLoc(...)`). Text updates automatically whenever language changes.
+* **Auto-Discovery**: Place `*_en.yaml`, `*_ru.yaml`, etc. anywhere in `Resources/Localization/`. Available languages are detected automatically.
+* **Per-Language Font Mapping**: Assign default and source-to-target font mappings with custom scale multipliers per locale.
+* **Auto-Updating UI**: Bind `TMP_Text` in one line (`text.BindLoc(...)`). Text and fonts update automatically when language changes.
 * **Inspector Integration**: Edit and add translations directly inside the Unity Inspector while configuring prefabs and ScriptableObjects.
+* **Configuration Window**: Standalone editor window (`Tools > xLoc > Configuration`) to manage locales and font assignments.
 * **Typed Access**: Use `LocalizedString` struct in your data models with automatic conversion to `string` and fallback support.
 
 ---
@@ -35,9 +37,9 @@
 
 ### 1. Create Localization Files
 
-Place your `.yml` files in `Assets/Resources/Localization/`:
+Place your `.yaml` or `.yml` files in `Assets/Resources/Localization/`:
 
-**`game_en.yml`**:
+**`game_en.yaml`**:
 ```yaml
 items:
   sword:
@@ -49,23 +51,37 @@ ui:
   settings: "Settings"
 ```
 
-**`game_es.yml`**:
+**`game_ru.yaml`**:
 ```yaml
 items:
   sword:
-    name: "Espada de hierro"
-    desc: "Una hoja de acero afilada."
+    name: "Железный меч"
+    desc: "Острое стальное лезвие."
 
 ui:
-  play: "Jugar"
-  settings: "Ajustes"
+  play: "Играть"
+  settings: "Настройки"
 ```
 
-> The locale code is extracted from the file suffix (e.g. `items_en.yml` -> `en`, `dialogue_es.yml` -> `es`).
+> The locale code is extracted from the file suffix (e.g. `items_en.yaml` -> `en`, `dialogue_ru.yaml` -> `ru`).
 
 ---
 
-### 2. Initialize in Code
+### 2. Configure Fonts
+
+Open **Tools** > **xLoc** > **Configuration**:
+
+1. Locales found in `Resources/Localization/` are listed on the left panel.
+2. For each locale:
+   * **Default Font**: Fallback `TMP_FontAsset` for text without a specific mapping.
+   * **Font Mappings**: Map authoring fonts (`Source Font`) to regional equivalents (`Target Font`) (e.g. `EnglishPixelFont` -> `CyrillicPixelFont`).
+   * **Scale Multiplier**: Adjust point size per font mapping (defaults to `1.0`) to compensate for language-specific character metrics.
+
+Configurations are automatically saved to `Assets/Resources/Localization/xLocSettings.asset`.
+
+---
+
+### 3. Initialize in Code
 
 Call `xLoc.Initialize()` once during your game bootstrap:
 
@@ -79,14 +95,14 @@ public class Bootstrapper
         xLoc.Initialize();
         
         // Optional: switch language explicitly
-        xLoc.SetLocale((LocaleKey)"es");
+        xLoc.SetLocale((LocaleKey)"ru");
     }
 }
 ```
 
 ---
 
-### 3. Usage
+### 4. Usage
 
 #### Direct Lookup
 ```csharp
@@ -117,7 +133,7 @@ string title = item.Title;
 ```
 
 #### TextMeshPro Auto-Binding
-Bind any `TMP_Text` in a single line. The text automatically updates whenever the locale changes:
+Bind any `TMP_Text` in a single line. The text and font automatically update whenever the locale changes:
 
 ```csharp
 using TMPro;
@@ -127,24 +143,29 @@ using xLoc.UI;
 public class ItemView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _titleText;
+    [SerializeField] private TMP_Text _dynamicCounterText;
 
     public void Setup(ItemData item)
     {
+        // 1. Localized text + font auto-swapping:
         _titleText.BindLoc(item.Title);
         // or by key:
         // _titleText.BindLoc("ui.play");
+
+        // 2. Font-only auto-swapping (for numbers, player names, etc.):
+        _dynamicCounterText.BindLoc();
     }
 }
 ```
 
 ---
 
-### 4. Inspector Workflow
+### 5. Inspector Workflow
 
 When viewing a `LocalizedString` in the Inspector:
 
 * **Key**: Enter the dot-notation key (e.g. `items.sword.name`).
-* **Locale Button (`[EN]`)**: Click to cycle between available languages (`[EN]` ↔ `[ES]`).
+* **Locale Button (`[EN]`)**: Click to cycle between available languages (`[EN]` ↔ `[RU]`).
 * **Localized**: Displays the existing translation for the selected language. Edit text and click **Add** to save directly into that language's YAML file.
 * **Fallback**: Default text returned if the translation is missing.
 

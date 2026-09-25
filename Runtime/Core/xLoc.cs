@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 namespace xLoc
 {
@@ -9,6 +11,7 @@ namespace xLoc
     public static class xLoc
     {
         private static LocaleRegistry _registry;
+        private static FontRegistry _fontRegistry = FontRegistry.Create(null);
 
         /// <summary>
         /// Indicates whether <see cref="xLoc"/> has been initialized.
@@ -47,6 +50,20 @@ namespace xLoc
             {
                 // Gracefully abort if no localization assets exist
             }
+
+            var settings = Resources.Load<xLocSettings>($"{path}/xLocSettings");
+            _fontRegistry = FontRegistry.Create(settings != null ? settings.LocaleFonts : null);
+        }
+
+        /// <summary>
+        /// Resolves the localized font and scale multiplier for the specified base font.
+        /// </summary>
+        internal static (TMP_FontAsset Font, float Scale) ResolveFont(TMP_FontAsset sourceFont)
+        {
+            if (!IsInitialized)
+                return (sourceFont, 1f);
+
+            return _fontRegistry.ResolveFont(CurrentLocale, sourceFont);
         }
 
         /// <summary>
