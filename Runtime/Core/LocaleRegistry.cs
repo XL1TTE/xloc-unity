@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace xLoc
+namespace xlLoc.Core
 {
     /// <summary>
     /// Registry managing registered <see cref="LocaleTable"/> instances and active locale state.

@@ -1,6 +1,6 @@
 using System;
 
-namespace xLoc
+namespace xlLoc.Core
 {
     /// <summary>
     /// Represents a localized text reference containing a dot-notation key and optional fallback string.

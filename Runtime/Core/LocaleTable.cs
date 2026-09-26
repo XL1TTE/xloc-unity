@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace xLoc
+namespace xlLoc.Core
 {
     /// <summary>
     /// Holds a collection of key-value translation pairs for a single locale.

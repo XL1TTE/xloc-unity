@@ -2,7 +2,7 @@ using System.IO;
 using UnityEditor.AssetImporters;
 using UnityEngine;
 
-namespace xLoc.Editor
+namespace xlLoc.Editor
 {
     [ScriptedImporter(1, new[] { "yml" })]
     public sealed class YamlTextImporter : ScriptedImporter

@@ -3,7 +3,7 @@ using System.Collections;
 using System.IO;
 using YamlDotNet.Serialization;
 
-namespace xLoc
+namespace xlLoc.Core
 {
     /// <summary>
     /// Loads and parses YAML content into a <see cref="LocaleTable"/>, flattening nested mappings into dot-notation keys.

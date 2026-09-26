@@ -1,6 +1,7 @@
 using TMPro;
+using xlLoc.Core;
 
-namespace xLoc.UI
+namespace xlLoc.UI
 {
     /// <summary>
     /// Extension methods for binding <see cref="TMP_Text"/> components to localized strings and fonts with automatic locale change updates.

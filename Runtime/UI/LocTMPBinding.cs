@@ -1,7 +1,8 @@
 using TMPro;
 using UnityEngine;
+using xlLoc.Core;
 
-namespace xLoc.UI
+namespace xlLoc.UI
 {
     /// <summary>
     /// Lightweight helper component attached to a <see cref="TMP_Text"/> GameObject that automatically updates text and localized fonts when the locale changes.

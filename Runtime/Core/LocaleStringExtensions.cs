@@ -1,6 +1,6 @@
 using System;
 
-namespace xLoc
+namespace xlLoc.Core
 {
     internal static class LocaleStringExtensions
     {

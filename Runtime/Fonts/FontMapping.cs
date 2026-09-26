@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace xLoc
+namespace xlLoc.Fonts
 {
     /// <summary>
     /// Represents a mapping between a base font asset and a localized target font asset with an optional scale multiplier.

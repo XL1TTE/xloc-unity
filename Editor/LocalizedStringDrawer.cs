@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using xlLoc.Core;
 
-namespace xLoc.Editor
+namespace xlLoc.Editor
 {
     [CustomPropertyDrawer(typeof(LocalizedString))]
     public sealed class LocalizedStringDrawer : PropertyDrawer

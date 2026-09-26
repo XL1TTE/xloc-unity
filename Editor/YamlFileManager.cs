@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
+using xlLoc.Core;
 using YamlDotNet.Serialization;
 
-namespace xLoc.Editor
+namespace xlLoc.Editor
 {
     internal static class YamlFileManager
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace xLoc
+namespace xlLoc.Core
 {
     /// <summary>
     /// Value object representing a validated locale identifier (e.g. "en", "ru", "pirate").

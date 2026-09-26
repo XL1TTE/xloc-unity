@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using xlLoc.Fonts;
 
-namespace xLoc
+namespace xlLoc.Core
 {
     /// <summary>
     /// Runtime ScriptableObject storing font localization configurations.

@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
+using xlLoc.Core;
 
-namespace xLoc
+namespace xlLoc.Fonts
 {
     /// <summary>
     /// Internal domain service providing fast font resolution for locales.

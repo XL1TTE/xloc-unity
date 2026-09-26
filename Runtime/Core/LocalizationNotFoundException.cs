@@ -1,6 +1,6 @@
 using System;
 
-namespace xLoc
+namespace xlLoc.Core
 {
     /// <summary>
     /// Exception thrown when no localization files or assets can be found at the specified path.

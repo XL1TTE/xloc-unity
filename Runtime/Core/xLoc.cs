@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using xlLoc.Fonts;
 
-namespace xLoc
+namespace xlLoc.Core
 {
     /// <summary>
     /// Static facade providing global access to localization tables, active locale configuration, and translation resolution.

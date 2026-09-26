@@ -1,4 +1,4 @@
-namespace xLoc
+namespace xlLoc.Core
 {
     /// <summary>
     /// Contract for loaders that populate a <see cref="LocaleTable"/> from serialized text.

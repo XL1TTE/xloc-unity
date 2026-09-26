@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace xLoc
+namespace xlLoc.Core
 {
     /// <summary>
     /// Discovers and loads localization <see cref="TextAsset"/> resources, constructing a populated <see cref="LocaleRegistry"/>.

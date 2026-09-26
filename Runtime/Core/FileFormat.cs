@@ -1,4 +1,4 @@
-namespace xLoc
+namespace xlLoc.Core
 {
     /// <summary>
     /// Supported file formats

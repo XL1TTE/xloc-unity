@@ -5,8 +5,10 @@ using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using xlLoc.Core;
+using xlLoc.Fonts;
 
-namespace xLoc.Editor
+namespace xlLoc.Editor
 {
     public sealed class xLocConfigWindow : EditorWindow
     {

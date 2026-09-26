@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using xlLoc.Core;
 
-namespace xLoc
+namespace xlLoc.Fonts
 {
     /// <summary>
     /// Value object defining default and mapped fonts for a single locale.
